@@ -231,7 +231,6 @@
   .card-data address{font-style:normal;font-size:13px;color:var(--text-secondary);line-height:1.9}
   .card-data address a{border-bottom:1px solid var(--border)}
   .card-data address a:hover{border-color:var(--mauve)}
-  .visit-actions{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-top:44px}
 
   /* ---------- Mapa ---------- */
   .map{margin-top:56px;border:1px solid var(--border);background:var(--greige);overflow:hidden}
@@ -244,21 +243,36 @@
   .map-bar .where b{display:block;color:var(--text-primary);font-weight:400;font-size:16px;
     font-family:var(--f-display)}
 
-  /* ---------- Newsletter ---------- */
-  .newsletter{background:var(--bg-page);text-align:center;position:relative;overflow:hidden}
-  .newsletter .wrap{position:relative;z-index:1}
-  .newsletter h2{margin:14px 0 14px}
-  .newsletter p{max-width:46ch;margin:0 auto 34px;color:var(--text-secondary)}
-  .signup{display:flex;max-width:480px;margin:0 auto;border-bottom:1px solid var(--text-primary)}
-  .signup input{flex:1;background:none;border:0;padding:14px 4px;font-family:var(--f-body);
-    font-size:16px;color:var(--text-primary);font-weight:300}
-  .signup input:focus{outline:none}
-  .signup input::placeholder{color:var(--text-secondary)}
-  .signup button{background:none;border:0;cursor:pointer;padding:0 6px;font-family:var(--f-body);
-    font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--action);transition:color .3s ease}
-  .signup button:hover{color:var(--action-hover)}
-  .newsletter .note{font-size:13px;color:var(--text-secondary);margin-top:16px}
+  /* ---------- Napište nám ---------- */
+  .write{background:var(--bg-page)}
+  .write-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:72px;align-items:start}
+  .write h2{margin:14px 0 18px}
+  .write-intro p{color:var(--text-secondary);max-width:44ch}
+  .write-direct{margin-top:34px;padding-top:26px;border-top:1px solid var(--border);
+    font-size:14px;line-height:2;color:var(--text-secondary)}
+  .write-direct a{color:var(--text-primary);border-bottom:1px solid var(--border)}
+  .write-direct a:hover{border-color:var(--action)}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .field-line{position:relative;margin-bottom:26px}
+  .field-line label{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--text-secondary);margin-bottom:8px}
+  .field-line input,.field-line textarea{width:100%;background:none;border:0;
+    border-bottom:1px solid var(--border);padding:8px 2px;font-family:var(--f-body);
+    font-size:16px;font-weight:300;color:var(--text-primary);transition:border-color .3s ease}
+  .field-line textarea{resize:vertical;min-height:120px;line-height:1.7}
+  .field-line input:focus,.field-line textarea:focus{outline:none;border-color:var(--mauve)}
+  .consent{display:flex;gap:12px;align-items:flex-start;font-size:13px;
+    color:var(--text-secondary);line-height:1.7;margin:6px 0 30px}
+  .consent input{margin-top:4px;accent-color:var(--action);flex:none}
+  .form-note{font-size:12px;color:var(--text-secondary);margin-top:18px}
+  .form-error{font-size:13px;color:var(--action);margin-top:14px}
+  .form-done{border:1px solid var(--border);background:var(--cream);padding:44px 40px;text-align:center}
+  .form-done-mark{width:38px;height:auto;color:var(--mauve);fill:currentColor;margin:0 auto 18px}
+  .form-done h3{font-family:var(--f-display);font-weight:300;font-size:28px;
+    color:var(--text-primary);margin-bottom:12px}
+  .form-done p{color:var(--text-secondary);font-size:15px;max-width:36ch;margin:0 auto}
+  .form-done a{color:var(--text-primary);border-bottom:1px solid var(--border)}
+  button[disabled]{opacity:.55;cursor:progress}
 
   /* ---------- Patička ---------- */
   footer{background:var(--espresso);color:var(--cream);padding:84px 0 36px;
@@ -267,9 +281,6 @@
   .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px;margin-bottom:56px}
   .foot-brand .mark{color:var(--cream);margin-bottom:20px}
 
-  .foot-brand
-  .foot-brand .sig{color:var(--dusty)}
-  .foot-brand .mark-stack .sig::before,.foot-brand .mark-stack .sig::after{background:var(--dusty)}
   .foot-brand p{color:rgba(244,238,229,.72);font-size:13px;max-width:30ch}
   footer h4{font-family:var(--f-body);font-weight:400;font-size:11px;letter-spacing:.22em;
     text-transform:uppercase;color:var(--dusty);margin-bottom:18px}
@@ -280,11 +291,10 @@
   .foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:24px;
     padding-top:28px;border-top:1px solid rgba(244,238,229,.18);flex-wrap:wrap;
     font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,238,229,.7)}
-  .switches{display:flex;gap:26px;flex-wrap:wrap}
-  .switch{display:flex;gap:12px}
-  .switch a{color:rgba(244,238,229,.7)}
-  .switch a:hover{color:var(--white)}
-  .switch a.on{color:var(--dusty)}
+  footer address{font-style:normal;color:rgba(244,238,229,.8);font-size:13px;line-height:1.9}
+  footer address a{color:var(--dusty);border-bottom:1px solid rgba(220,202,194,.4)}
+  footer address a:hover{color:var(--white)}
+  footer .hours{color:rgba(244,238,229,.6);font-size:13px;line-height:1.9;margin-top:16px}
   .monogram{width:66px;height:66px;margin-bottom:24px;color:var(--dusty)}
 
   /* ---------- Mobilní menu ---------- */
@@ -303,9 +313,6 @@
     padding:14px 0;border-bottom:1px solid var(--border)}
   .drawer .drawer-meta{margin-top:auto;padding-top:32px;font-size:13px;color:var(--text-secondary);line-height:1.9}
   .drawer .drawer-meta a{border-bottom:1px solid var(--border)}
-  .drawer .switches{margin-top:22px;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
-  .drawer .switch a{color:var(--text-secondary)}
-  .drawer .switch a.on{color:var(--action)}
   body.locked{overflow:hidden}
 
   /* ---------- Reveal ---------- */
@@ -380,7 +387,6 @@
     </ul>
     <a href="#" class="mark" aria-label="Láska v krajkách — domů"><svg class="logo" viewBox="-12.0 -15.3 3558.6 2143.9" aria-hidden="true"><use href="#logo"/></svg></a>
     <div class="nav-right">
-      <button class="pill" type="button">CZ / CZK</button>
       <button class="pill burger" type="button" id="burger" aria-label="Otevřít menu"
         aria-expanded="false" aria-controls="drawer">Menu</button>
     </div>
@@ -398,17 +404,13 @@
       <a href="#o-nas">O nás</a>
       <a href="#velikosti">Velikosti</a>
       <a href="#kontakt">Kontakt</a>
-      <a href="vizitka.html">Vizitka</a>
+      <a href="#napiste">Napište nám</a>
     </nav>
     <div class="drawer-meta">
       Štěpánská 4, 120 00 Praha 2<br>
       Po–Pá 10–19 · So 10–16<br>
       <a href="tel:+420608703703">+420 608 703 703</a><br>
       <a href="mailto:info@laskavkrajkach.cz">info@laskavkrajkach.cz</a>
-      <div class="switches">
-        <div class="switch"><a href="#" class="on">CZ</a> <a href="#">EN</a> <a href="#">DE</a> ·
-        <a href="#" class="on">CZK</a> <a href="#">EUR</a></div>
-      </div>
     </div>
   </div>
 </div>
@@ -495,7 +497,7 @@
       <span class="eyebrow">Kolekce Podzim / Zima 2026</span>
       <h2>Krajka, která se nosí, ne vystavuje</h2>
       <p>Tlumené nude tóny, ručně dokončované okraje a materiály, které se na kůži skoro neozvou. Kolekce pro chvíle, kdy se oblékáte jen samy pro sebe.</p>
-      <a href="#" class="btn btn-secondary">Prohlédnout lookbook</a>
+      <a href="#kontakt" class="btn btn-secondary">Přijďte si ji vyzkoušet</a>
     </div>
   </div>
 </section>
@@ -572,7 +574,6 @@
         <span class="eyebrow">Nové na pultě</span>
         <h2>Novinky v butiku</h2>
       </div>
-      <a href="#" class="link">Zobrazit vše</a>
     </div>
     <div class="products">
       <article class="product reveal">
@@ -631,7 +632,7 @@
         <span class="eyebrow">Průvodce velikostmi</span>
         <h2>Dobrý střih začíná správným číslem</h2>
         <p>Stačí dvě míry a krejčovský metr. Průvodce spočítá velikost, vysvětlí sesterská čísla a poradí, podle čeho poznáte, že podprsenka sedí. Součástí je přepočet EU / UK / US.</p>
-        <a href="#" class="btn btn-primary">Zjistit svou velikost</a>
+        <a href="#napiste" class="btn btn-primary">Poradíme s velikostí</a>
       </div>
     </div>
   </section>
@@ -668,10 +669,6 @@
         </address>
       </div>
     </div>
-    <div class="visit-actions reveal">
-      <a href="tel:+420608703703" class="btn btn-primary">Objednat se na zkoušení</a>
-      <a href="vizitka.html" class="link">Koncept vizitky</a>
-    </div>
 
     <div class="map reveal">
       <div class="map-frame">
@@ -687,18 +684,66 @@
   </div>
 </section>
 
-<!-- NEWSLETTER -->
-<section class="newsletter">
+<!-- NAPIŠTE NÁM -->
+<section class="write" id="napiste">
   <div class="wrap">
-    <div class="reveal">
-      <span class="eyebrow">Dopisy z butiku</span>
-      <h2>Zůstaňme v kontaktu</h2>
-      <p>Jednou za měsíc novinky z regálů, pozvánka na zkoušecí večery a rady, jak prádlu prodloužit život.</p>
-      <form class="signup" onsubmit="return false">
-        <input type="email" placeholder="Váš e-mail" aria-label="Váš e-mail">
-        <button type="submit">Přihlásit se</button>
-      </form>
-      <p class="note">Odhlásit se můžete jedním kliknutím. E-mail nikam nepředáváme.</p>
+    <div class="write-grid">
+      <div class="write-intro reveal">
+        <span class="eyebrow">Napište nám</span>
+        <h2>Kontaktujte nás</h2>
+        <p>Máte dotaz na velikost, dostupnost značky nebo si chcete domluvit zkoušení mimo
+          otevírací dobu? Napište nám a ozveme se obvykle do druhého pracovního dne.</p>
+        <div class="write-direct">
+          Raději napřímo?<br>
+          <a href="mailto:info@laskavkrajkach.cz">info@laskavkrajkach.cz</a><br>
+          <a href="tel:+420608703703">+420 608 703 703</a><br>
+          Po–Pá 10–19 · So 10–16
+        </div>
+      </div>
+
+      <div class="reveal">
+        <!-- Odesílání zajišťuje Formspree (endpoint xeeyypkg).
+             JS odešle formulář na pozadí a zobrazí poděkování rovnou na stránce;
+             bez JS se formulář odešle klasicky a Formspree zobrazí své potvrzení. -->
+        <form id="contact-form" action="https://formspree.io/f/xeeyypkg" method="POST">
+          <input type="hidden" name="_subject" value="Dotaz z webu laskavkrajkach.cz">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
+
+          <div class="form-row">
+            <div class="field-line">
+              <label for="jmeno">Jméno</label>
+              <input id="jmeno" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field-line">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+          </div>
+          <div class="field-line">
+            <label for="telefon">Telefon <span style="text-transform:none;letter-spacing:0">(nepovinné)</span></label>
+            <input id="telefon" name="phone" type="tel" autocomplete="tel">
+          </div>
+          <div class="field-line">
+            <label for="zprava">Zpráva</label>
+            <textarea id="zprava" name="message" required></textarea>
+          </div>
+          <label class="consent">
+            <input type="checkbox" name="consent" value="Souhlasím se zpracováním údajů" required>
+            <span>Souhlasím, aby butik použil mé údaje k odpovědi na tento dotaz.
+              Dál je nikam nepředáváme.</span>
+          </label>
+          <button type="submit" class="btn btn-primary" id="contact-submit">Odeslat zprávu</button>
+          <p class="form-note">Zprávy chodí na info@laskavkrajkach.cz.</p>
+          <p class="form-error" id="contact-error" role="alert" hidden></p>
+        </form>
+
+        <div class="form-done" id="contact-done" hidden>
+          <svg class="form-done-mark" viewBox="718.5 -15.3 422.1 384.3" aria-hidden="true"><use href="#heart"/></svg>
+          <h3>Děkujeme za zprávu</h3>
+          <p>Ozveme se obvykle do druhého pracovního dne. Když to spěchá, zavolejte na
+            <a href="tel:+420608703703">+420 608 703 703</a>.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -715,42 +760,38 @@
     <div class="foot-top">
       <div class="foot-brand">
         <span class="mark mark-stack"><svg class="logo" viewBox="-12.0 -15.3 3558.6 2143.9" aria-hidden="true"><use href="#logo"/></svg></span>
-        <p>Butik spodního prádla, plavek a doplňků. Štěpánská 4, Praha 2.</p>
+        <p>Butik spodního prádla, plavek a doplňků. Osobní zkoušení bez objednání,
+          diskrétní balení.</p>
       </div>
       <div>
         <h4>Butik</h4>
         <ul>
-          <li><a href="#o-nas">O nás</a></li>
           <li><a href="#kolekce">Kolekce</a></li>
-          <li><a href="#">Lookbook</a></li>
-          <li><a href="#">Dárkové poukazy</a></li>
+          <li><a href="#o-nas">O nás</a></li>
+          <li><a href="#velikosti">Velikosti</a></li>
+          <li><a href="#napiste">Napište nám</a></li>
         </ul>
       </div>
       <div>
-        <h4>Pomůžeme</h4>
-        <ul>
-          <li><a href="#velikosti">Průvodce velikostmi</a></li>
-          <li><a href="#">Péče o prádlo</a></li>
-          <li><a href="#">Doprava a vrácení</a></li>
-          <li><a href="#">Diskrétní balení</a></li>
-        </ul>
+        <h4>Kde nás najdete</h4>
+        <address>
+          Štěpánská 4<br>120 00 Praha 2<br>
+          <a target="_blank" rel="noopener"
+             href="https://www.google.com/maps/search/?api=1&amp;query=%C5%A0t%C4%9Bp%C3%A1nsk%C3%A1+4%2C+120+00+Praha+2">Zobrazit na mapě</a>
+        </address>
+        <p class="hours">Po–Pá 10–19<br>So 10–16<br>Ne zavřeno</p>
       </div>
       <div>
         <h4>Kontakt</h4>
         <ul>
-          <li><a href="#kontakt">Štěpánská 4, Praha 2</a></li>
           <li><a href="tel:+420608703703">+420 608 703 703</a></li>
           <li><a href="mailto:info@laskavkrajkach.cz">info@laskavkrajkach.cz</a></li>
-          <li><a href="#">laska_v_krajkach</a></li>
         </ul>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 Láska v krajkách · laskavkrajkach.cz · Praha</span>
-      <div class="switches">
-        <div class="switch"><a href="#" class="on">CZ</a><a href="#">EN</a><a href="#">DE</a></div>
-        <div class="switch"><a href="#" class="on">CZK</a><a href="#">EUR</a></div>
-      </div>
+      <span>© 2026 Láska v krajkách · laskavkrajkach.cz</span>
+      <span>Štěpánská 4, Praha 2</span>
     </div>
   </div>
 </footer>
@@ -773,6 +814,48 @@
   addEventListener('scroll', queue, {passive:true});
   addEventListener('resize', queue);
   addEventListener('hashchange', queue);
+
+  /* ---- Kontaktní formulář (Formspree, AJAX) ---- */
+  (function(){
+    const form = document.getElementById('contact-form');
+    if(!form) return;
+    const btn  = document.getElementById('contact-submit');
+    const err  = document.getElementById('contact-error');
+    const done = document.getElementById('contact-done');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      err.hidden = true;
+      btn.disabled = true;
+      const label = btn.textContent;
+      btn.textContent = 'Odesílám…';
+      try{
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if(res.ok){
+          form.hidden = true;
+          done.hidden = false;
+          done.scrollIntoView({ behavior:'smooth', block:'center' });
+          return;
+        }
+        const data = await res.json().catch(()=>null);
+        err.textContent = (data && data.errors)
+          ? data.errors.map(x => x.message).join(' ')
+          : 'Zprávu se nepodařilo odeslat. Napište nám prosím na info@laskavkrajkach.cz.';
+        err.hidden = false;
+      }catch(_){
+        err.textContent = 'Zprávu se nepodařilo odeslat — zkontrolujte připojení, '
+          + 'nebo nám napište na info@laskavkrajkach.cz.';
+        err.hidden = false;
+      }finally{
+        btn.disabled = false;
+        btn.textContent = label;
+      }
+    });
+  })();
 
   /* ---- Mobilní menu ---- */
   (function(){
