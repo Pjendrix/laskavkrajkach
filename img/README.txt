@@ -32,3 +32,18 @@ logo.svg a spol. používají "currentColor" a v index.html se vkládají
 jako CSS maska, takže barvu určuje styl stránky (mauve v hlavičce,
 krémová v patičce). Když soubor otevřete samostatně, uvidíte ho černý.
 To je v pořádku.
+
+
+---
+AKTUALIZACE
+
+roh.svg      krajkový ornament do horních rohů hlavičky
+og-image.png náhled pro sdílení odkazu na Facebooku (1200x630)
+
+Na server patří DVA HTML soubory:
+
+    index.html   česká verze  -> laskavkrajkach.cz/
+    en.html      anglická     -> laskavkrajkach.cz/en.html
+    img/         společná pro obě
+
+Pozor: každou budoucí změnu textu je nutné udělat v obou souborech.
