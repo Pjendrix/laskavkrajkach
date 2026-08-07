@@ -280,10 +280,36 @@
   .calc-out{margin-top:28px;padding-top:24px;border-top:1px solid var(--border);text-align:center}
   .calc-size{font-family:var(--f-display);font-weight:300;
     font-size:clamp(42px,7vw,68px);line-height:1;color:var(--text-primary)}
-  .calc-conv{font-size:13px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--text-secondary);margin-top:14px}
   .calc-note{font-size:13px;color:var(--text-secondary);margin-top:16px;line-height:1.7}
   .calc-hint{font-size:12px;color:var(--text-secondary);margin-top:18px;line-height:1.7}
+  /* ---------- Tooltip se vzorcem ---------- */
+  .calc-info{position:relative;margin-top:18px}
+  .calc-info-btn{display:inline-flex;align-items:center;gap:8px;background:none;border:0;padding:0;
+    cursor:pointer;font:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--text-secondary);transition:color .25s ease}
+  .calc-info-btn:hover,.calc-info-btn:focus-visible{color:var(--wine)}
+  .calc-info-ico{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;
+    border:1px solid currentColor;border-radius:50%;font-size:10px;letter-spacing:0;
+    text-transform:none;font-style:italic;line-height:1}
+  .calc-tip{position:absolute;z-index:6;left:0;right:0;bottom:calc(100% + 12px);
+    background:var(--cream);border:1px solid var(--mauve);padding:20px 20px 18px;
+    box-shadow:0 22px 48px -26px rgba(42,33,30,.55)}
+  .calc-tip::after{content:"";position:absolute;left:26px;bottom:-7px;width:12px;height:12px;
+    background:var(--cream);border-right:1px solid var(--mauve);border-bottom:1px solid var(--mauve);
+    transform:rotate(45deg)}
+  .calc-tip p{font-size:12px;line-height:1.7;color:var(--text-secondary);margin:0 0 10px}
+  .calc-tip p:last-child{margin-bottom:0}
+  .calc-tip b{color:var(--text-primary);font-weight:400}
+  .calc-tab{width:100%;border-collapse:collapse;margin:12px 0 12px;font-size:11px}
+  .calc-tab th,.calc-tab td{border:1px solid var(--mauve);padding:5px 4px;text-align:center;
+    color:var(--text-secondary);font-weight:400;white-space:nowrap}
+  .calc-tab th{letter-spacing:.06em;text-transform:uppercase;font-size:9px;color:var(--text-primary)}
+  @media (max-width:560px){
+    .calc-tip{position:static;margin-top:12px}
+    .calc-tip::after{display:none}
+    .calc-tab{font-size:10px}
+    .calc-tab th,.calc-tab td{padding:4px 2px}
+  }
   .calc-err{color:var(--action);font-size:13px;margin-top:16px}
 
   /* ---------- Formulář jako mailbox ---------- */
@@ -621,7 +647,7 @@
     <div class="reveal">
       <span class="eyebrow">Butik spodního prádla - s prodejem plavek po celý rok!</span>
       <h1>Krajka, která zůstane vaše tajemství.</h1>
-      <p>Spodní prádlo, plavky a doplňky vybírané kus po kuse. Přijďte si pro střih, který sedne - a odejděte s krabičkou, na které nikdo nic nepozná.</p>
+      <p>Spodní prádlo, plavky a doplňky vybírané kus po kuse. Přijďte si pro střih, který sedne.</p>
       <div class="actions">
         <a href="#sortiment" class="btn btn-primary">Prohlédnout sortiment</a>
       </div>
@@ -683,7 +709,7 @@
     <div class="lookbook-copy reveal">
       <span class="eyebrow">Vybíráme kus po kuse</span>
       <h2>Značky, kterým věříme</h2>
-      <p>Nakupujeme u menších evropských značek z Česka, Polska, Francie a Itálie. Vybíráme podle střihu, materiálu a toho, jak prádlo drží - ne podle toho, co se zrovna nosí.</p>
+      <p>Nakupujeme u různých značek z Evropy a vybíráme pro vás ty nejkvalitnější za rozumnou cenu, kterým rozumíme.</p>
       <a href="#kontakt" class="btn btn-secondary">Přijďte si je vyzkoušet</a>
     </div>
   </div>
@@ -735,12 +761,12 @@
       <div class="care-item reveal">
         <div class="lace lace-dark" aria-hidden="true"></div>
         <h3>Zkoušení bez spěchu</h3>
-        <p>Kabinka je vaše, jak dlouho potřebujete. Doneseme víc velikostí i střihů, ať máte co porovnávat - a mezitím vás necháme být.</p>
+        <p>Kabinka je vaše, jak dlouho potřebujete. Doneseme víc velikostí i střihů, ať máte co porovnávat.</p>
       </div>
       <div class="care-item reveal">
         <div class="lace lace-dark" aria-hidden="true"></div>
-        <h3>Změříme vás na místě</h3>
-        <p>Většina žen nosí o číslo vedle a ani o tom neví. Vezmeme metr, doměříme obvod i košíček a řekneme vám to na rovinu.</p>
+        <h3>Pomůžeme vám zjistit vaši velikost</h3>
+        <p>Většina žen nosí o číslo vedle a ani o tom neví. Poznáme podle střihu a podle toho, jak prádlo sedí, co je pro vás to pravé - a řekneme vám to na rovinu.</p>
       </div>
       <div class="care-item reveal">
         <div class="lace lace-dark" aria-hidden="true"></div>
@@ -750,7 +776,7 @@
       <div class="care-item reveal">
         <div class="lace lace-dark" aria-hidden="true"></div>
         <h3>Balíme s láskou</h3>
-        <p>Nákup zabalíme do neutrální krabičky bez potisku. Co jste u nás koupila, zůstane jen mezi námi.</p>
+        <p>Prádlo zabalíme diskrétně a s péčí. Kousek Lásky v krajkách si odnesete domů - a co jste u nás koupila, zůstane jen mezi námi.</p>
       </div>
     </div>
   </div>
@@ -764,7 +790,7 @@
         <span class="eyebrow">Průvodce velikostmi</span>
         <h2>Dobrý střih začíná správným číslem</h2>
         <p>Stačí krejčovský metr a dvě míry. Obvod pod prsy měřte těsně pod prsy, metr veďte vodorovně a utáhněte pevně. Obvod prsou měřte přes nejširší místo, volně, bez stlačení.</p>
-        <p style="margin-bottom:0">Kalkulačka spočítá evropskou velikost a přepočte ji na UK a US. Výsledek berte jako výchozí bod - každá značka střihá trochu jinak, proto se u nás vždycky zkouší.</p>
+        <p style="margin-bottom:0">Kalkulačka spočítá evropskou velikost a nabídne i sesterské velikosti k vyzkoušení. Výsledek berte jako výchozí bod - každá značka střihá trochu jinak, proto se u nás vždycky zkouší.</p>
       </div>
 
       <div class="calc reveal">
@@ -782,11 +808,24 @@
 
         <div class="calc-out" id="calcOut" hidden>
           <div class="calc-size" id="calcSize">-</div>
-          <div class="calc-conv" id="calcConv"></div>
           <p class="calc-note" id="calcNote"></p>
         </div>
         <p class="calc-err" id="calcErr" hidden></p>
-        <p class="calc-hint">Jak to počítáme: obvod pod prsy určuje číslo obvodu (65, 70, 75, 80…), rozdíl mezi obvodem prsou a obvodem pod prsy určuje košíček - každé dva centimetry rozdílu znamenají o jeden košíček víc.</p>
+        <div class="calc-info">
+          <div class="calc-tip" id="calcInfoBox" role="note" hidden>
+            <p><b>Číslo obvodu</b> = obvod pod prsy zaokrouhlený na nejbližší pětku (73–77 cm → 75, 78–82 cm → 80…).</p>
+            <p><b>Košíček</b> = obvod prsou − číslo obvodu. Každé dva centimetry rozdílu znamenají o jeden košíček víc.</p>
+            <table class="calc-tab">
+              <tr><th>Rozdíl</th><td>10–12</td><td>12–14</td><td>14–16</td><td>16–18</td><td>18–20</td><td>20–22</td><td>22–24</td><td>24–26</td></tr>
+              <tr><th>Košíček</th><td>AA</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr>
+            </table>
+            <p>Příklad: 78 cm pod prsy a 94 cm přes prsa → obvod <b>80</b>, rozdíl <b>14 cm</b> → velikost <b>80B</b>.</p>
+            <p>Výsledek je orientační. Každá značka střihá trochu jinak, proto se u nás vždycky zkouší.</p>
+          </div>
+          <button type="button" class="calc-info-btn" id="calcInfoBtn" aria-expanded="false" aria-controls="calcInfoBox">
+            <span class="calc-info-ico" aria-hidden="true">i</span> Jak velikost počítáme
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -1048,7 +1087,7 @@
     });
   })();
 
-  /* ---- Kalkulačka velikosti podprsenky ---- */
+  /* ---- Kalkulačka velikosti podprsenky (EU) ---- */
   (function(){
     const btn = document.getElementById('calcBtn');
     if(!btn) return;
@@ -1057,61 +1096,102 @@
     const out   = document.getElementById('calcOut');
     const err   = document.getElementById('calcErr');
     const elSize= document.getElementById('calcSize');
-    const elConv= document.getElementById('calcConv');
     const elNote= document.getElementById('calcNote');
 
-    /* Košíček podle rozdílu (obvod prsou − obvod pod prsy), v cm. */
+    /* Evropská tabulka košíčků.
+       Rozdíl = obvod prsou − číslo obvodu (tj. zaokrouhlený obvod pod prsy),
+       hranice po 2 cm, spodní mez včetně. */
+    const DEC = ',';
+    const T = {
+      empty:     'Vyplňte prosím obě míry v centimetrech.',
+      rangePod:  'Obvod pod prsy zadejte v rozmezí 55–140 cm.',
+      rangePres: 'Obvod prsou zadejte v rozmezí 60–180 cm.',
+      order:     'Obvod prsou musí být větší než obvod pod prsy. Zkontrolujte prosím měření.',
+      tooSmall:  'Rozdíl vychází menší než 10 cm. Zkontrolujte prosím měření - nebo se stavte u nás, poradíme na místě.',
+      recap:     'Číslo obvodu <b>{b}</b>, rozdíl proti obvodu prsou <b>{d} cm</b>.',
+      edge:      'Jste přesně na hranici dvou košíčků - zkuste i <b>{s}</b>.',
+      sisters:   'Sesterské velikosti k vyzkoušení: {list}.',
+      invite:    'Pojďte si je k nám v klidu vyzkoušet.'
+    };
+
     const CUPS = [
-      {max:11.5, eu:'AA', uk:'AA', us:'AA'},
-      {max:13.5, eu:'A',  uk:'A',  us:'A' },
-      {max:15.5, eu:'B',  uk:'B',  us:'B' },
-      {max:17.5, eu:'C',  uk:'C',  us:'C' },
-      {max:19.5, eu:'D',  uk:'D',  us:'D' },
-      {max:21.5, eu:'E',  uk:'DD', us:'DD'},
-      {max:23.5, eu:'F',  uk:'E',  us:'DDD/F'},
-      {max:25.5, eu:'G',  uk:'F',  us:'G' },
-      {max:27.5, eu:'H',  uk:'FF', us:'H' },
-      {max:29.5, eu:'I',  uk:'G',  us:'I' },
-      {max:31.5, eu:'J',  uk:'GG', us:'J' },
-      {max:99,   eu:'K',  uk:'H',  us:'K' }
+      {min:10, eu:'AA'}, {min:12, eu:'A'}, {min:14, eu:'B'}, {min:16, eu:'C'},
+      {min:18, eu:'D'},  {min:20, eu:'E'}, {min:22, eu:'F'}, {min:24, eu:'G'},
+      {min:26, eu:'H'},  {min:28, eu:'I'}, {min:30, eu:'J'}, {min:32, eu:'K'}
     ];
 
-    function show(msg){ err.textContent = msg; err.hidden = false; out.hidden = true; }
+    function cupFor(d){
+      let c = CUPS[0];
+      for(let k = 0; k < CUPS.length; k++){ if(d >= CUPS[k].min - 1e-9) c = CUPS[k]; }
+      return c;
+    }
+    function fmt(n){ return (Math.round(n * 10) / 10).toFixed(1).replace('.', DEC); }
+    function fail(msg){ err.textContent = msg; err.hidden = false; out.hidden = true; }
 
     btn.addEventListener('click', function(){
       const pod  = parseFloat(String(inPod.value).replace(',','.'));
       const pres = parseFloat(String(inPres.value).replace(',','.'));
-      if(!isFinite(pod) || !isFinite(pres)) return show('Vyplňte prosím obě míry v centimetrech.');
-      if(pod < 55 || pod > 140)  return show('Obvod pod prsy zadejte v rozmezí 55–140 cm.');
-      if(pres <= pod)            return show('Obvod prsou musí být větší než obvod pod prsy. Zkontrolujte prosím měření.');
+      if(!isFinite(pod) || !isFinite(pres)) return fail(T.empty);
+      if(pod < 55 || pod > 140)             return fail(T.rangePod);
+      if(pres < 60 || pres > 180)           return fail(T.rangePres);
+      if(pres <= pod)                       return fail(T.order);
+
+      /* Číslo obvodu = obvod pod prsy zaokrouhlený na nejbližší pětku. */
+      const band = Math.min(110, Math.max(60, Math.round(pod / 5) * 5));
+      /* Košíček se počítá proti číslu obvodu, ne proti syrové míře. */
+      const diff = pres - band;
+
+      if(diff < 10) return fail(T.tooSmall);
 
       err.hidden = true;
-
-      /* Číslo obvodu = obvod pod prsy zaokrouhlený na nejbližší pětku (65, 70, 75…). */
-      const band = Math.round(pod / 5) * 5;
-      const diff = pres - pod;
-      const cup  = CUPS.find(c => diff < c.max) || CUPS[CUPS.length-1];
-
-      /* Přepočet obvodu: EU 65 = UK/US 30, každých 5 cm = 2 palcové velikosti. */
-      const bandUK = 30 + (band - 65) / 5 * 2;
+      const cup = cupFor(diff);
+      const i   = CUPS.indexOf(cup);
 
       elSize.textContent = band + ' ' + cup.eu;
-      elConv.textContent = 'EU ' + band + cup.eu + '  ·  UK ' + bandUK + cup.uk + '  ·  US ' + bandUK + cup.us;
 
-      /* Sesterské velikosti. */
-      const iCup = CUPS.indexOf(cup);
+      const parts = [T.recap.replace('{b}', band).replace('{d}', fmt(diff))];
+
+      /* Hraniční hodnota - nabídneme i sousední košíček. */
+      const up = CUPS[i+1];
+      if(up && (up.min - diff) <= 0.5){
+        parts.push(T.edge.replace('{s}', band + up.eu));
+      } else if(i > 0 && (diff - cup.min) <= 0.5){
+        parts.push(T.edge.replace('{s}', band + CUPS[i-1].eu));
+      }
+
+      /* Sesterské velikosti: o obvod dolů = košíček nahoru a naopak. */
       const sis = [];
-      if(band > 60 && iCup < CUPS.length-1) sis.push((band-5) + CUPS[iCup+1].eu);
-      if(iCup > 0)                          sis.push((band+5) + CUPS[iCup-1].eu);
-      elNote.innerHTML = 'Rozdíl měr je ' + diff.toFixed(1).replace('.',',') + ' cm.'
-        + (sis.length ? ' Sesterské velikosti k vyzkoušení: <b>' + sis.join('</b>, <b>') + '</b>.' : '')
-        + ' Pojďte si je k nám v klidu vyzkoušet.';
+      if(band > 60  && CUPS[i+1]) sis.push((band - 5) + CUPS[i+1].eu);
+      if(band < 110 && i > 0)     sis.push((band + 5) + CUPS[i-1].eu);
+      if(sis.length) parts.push(T.sisters.replace('{list}', '<b>' + sis.join('</b>, <b>') + '</b>'));
+
+      parts.push(T.invite);
+      elNote.innerHTML = parts.join(' ');
       out.hidden = false;
     });
 
-    [inPod, inPres].forEach(i => i.addEventListener('keydown', e => {
-      if(e.key === 'Enter'){ e.preventDefault(); btn.click(); }
-    }));
+    [inPod, inPres].forEach(function(i){
+      i.addEventListener('keydown', function(e){
+        if(e.key === 'Enter'){ e.preventDefault(); btn.click(); }
+      });
+    });
+
+    /* ---- Tooltip se vzorcem ---- */
+    const iBtn = document.getElementById('calcInfoBtn');
+    const iBox = document.getElementById('calcInfoBox');
+    if(iBtn && iBox){
+      function setTip(open){
+        iBox.hidden = !open;
+        iBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      iBtn.addEventListener('click', function(e){ e.stopPropagation(); setTip(iBox.hidden); });
+      document.addEventListener('click', function(e){
+        if(!iBox.hidden && !iBox.contains(e.target) && e.target !== iBtn) setTip(false);
+      });
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && !iBox.hidden){ setTip(false); iBtn.focus(); }
+      });
+    }
   })();
 
   /* ---- Mobilní menu ---- */
