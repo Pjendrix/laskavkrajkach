@@ -280,10 +280,36 @@
   .calc-out{margin-top:28px;padding-top:24px;border-top:1px solid var(--border);text-align:center}
   .calc-size{font-family:var(--f-display);font-weight:300;
     font-size:clamp(42px,7vw,68px);line-height:1;color:var(--text-primary)}
-  .calc-conv{font-size:13px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--text-secondary);margin-top:14px}
   .calc-note{font-size:13px;color:var(--text-secondary);margin-top:16px;line-height:1.7}
   .calc-hint{font-size:12px;color:var(--text-secondary);margin-top:18px;line-height:1.7}
+  /* ---------- Tooltip se vzorcem ---------- */
+  .calc-info{position:relative;margin-top:18px}
+  .calc-info-btn{display:inline-flex;align-items:center;gap:8px;background:none;border:0;padding:0;
+    cursor:pointer;font:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--text-secondary);transition:color .25s ease}
+  .calc-info-btn:hover,.calc-info-btn:focus-visible{color:var(--wine)}
+  .calc-info-ico{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;
+    border:1px solid currentColor;border-radius:50%;font-size:10px;letter-spacing:0;
+    text-transform:none;font-style:italic;line-height:1}
+  .calc-tip{position:absolute;z-index:6;left:0;right:0;bottom:calc(100% + 12px);
+    background:var(--cream);border:1px solid var(--mauve);padding:20px 20px 18px;
+    box-shadow:0 22px 48px -26px rgba(42,33,30,.55)}
+  .calc-tip::after{content:"";position:absolute;left:26px;bottom:-7px;width:12px;height:12px;
+    background:var(--cream);border-right:1px solid var(--mauve);border-bottom:1px solid var(--mauve);
+    transform:rotate(45deg)}
+  .calc-tip p{font-size:12px;line-height:1.7;color:var(--text-secondary);margin:0 0 10px}
+  .calc-tip p:last-child{margin-bottom:0}
+  .calc-tip b{color:var(--text-primary);font-weight:400}
+  .calc-tab{width:100%;border-collapse:collapse;margin:12px 0 12px;font-size:11px}
+  .calc-tab th,.calc-tab td{border:1px solid var(--mauve);padding:5px 4px;text-align:center;
+    color:var(--text-secondary);font-weight:400;white-space:nowrap}
+  .calc-tab th{letter-spacing:.06em;text-transform:uppercase;font-size:9px;color:var(--text-primary)}
+  @media (max-width:560px){
+    .calc-tip{position:static;margin-top:12px}
+    .calc-tip::after{display:none}
+    .calc-tab{font-size:10px}
+    .calc-tab th,.calc-tab td{padding:4px 2px}
+  }
   .calc-err{color:var(--action);font-size:13px;margin-top:16px}
 
   /* ---------- Formulář jako mailbox ---------- */
@@ -621,7 +647,7 @@
     <div class="reveal">
       <span class="eyebrow">A lingerie boutique - with swimwear all year round</span>
       <h1>Lace that stays your secret.</h1>
-      <p>Lingerie, swimwear and accessories, chosen piece by piece. Come in for a cut that fits - and leave with a box that gives nothing away.</p>
+      <p>Lingerie, swimwear and accessories, chosen piece by piece. Come in for a cut that fits.</p>
       <div class="actions">
         <a href="#sortiment" class="btn btn-primary">See what we stock</a>
       </div>
@@ -683,7 +709,7 @@
     <div class="lookbook-copy reveal">
       <span class="eyebrow">Chosen piece by piece</span>
       <h2>Brands we trust</h2>
-      <p>We buy from smaller European makers in Czechia, Poland, France and Italy. We choose by cut, fabric and how well a piece holds its shape - not by what happens to be in fashion.</p>
+      <p>We buy from a range of European brands, picking the best quality we can find at a sensible price - labels we know inside out.</p>
       <a href="#kontakt" class="btn btn-secondary">Come and try them on</a>
     </div>
   </div>
@@ -735,12 +761,12 @@
       <div class="care-item reveal">
         <div class="lace lace-dark" aria-hidden="true"></div>
         <h3>No rush in the fitting room</h3>
-        <p>The fitting room is yours for as long as you need. We will bring several sizes and cuts so you have something to compare - and then leave you to it.</p>
+        <p>The fitting room is yours for as long as you need. We will bring several sizes and cuts so you have something to compare.</p>
       </div>
       <div class="care-item reveal">
         <div class="lace lace-dark" aria-hidden="true"></div>
-        <h3>We measure you in store</h3>
-        <p>Most women wear the wrong size without knowing it. We will take a tape measure to your band and cup, and tell you straight.</p>
+        <h3>We will help you find your size</h3>
+        <p>Most women wear the wrong size without knowing it. We can tell from the cut and the way a piece sits what will work for you - and we will tell you straight.</p>
       </div>
       <div class="care-item reveal">
         <div class="lace lace-dark" aria-hidden="true"></div>
@@ -750,7 +776,7 @@
       <div class="care-item reveal">
         <div class="lace lace-dark" aria-hidden="true"></div>
         <h3>Wrapped with care</h3>
-        <p>We wrap your purchase in a plain, unbranded box. What you bought here stays between us.</p>
+        <p>We wrap your purchase discreetly and with care. You take a little Láska v krajkách home with you - and what you bought here stays between us.</p>
       </div>
     </div>
   </div>
@@ -764,7 +790,7 @@
         <span class="eyebrow">Sizing guide</span>
         <h2>A good fit starts with the right number</h2>
         <p>All you need is a tape measure and two measurements. For the underbust, measure snugly just below the bust, keeping the tape level and pulled firm. For the bust, measure around the fullest point, loosely, without compressing.</p>
-        <p style="margin-bottom:0">The calculator works out your European size and converts it to UK and US. Treat the result as a starting point - every brand cuts a little differently, which is why we always try things on here.</p>
+        <p style="margin-bottom:0">The calculator works out your European size and suggests sister sizes worth trying. Treat the result as a starting point - every brand cuts a little differently, which is why we always try things on here.</p>
       </div>
 
       <div class="calc reveal">
@@ -782,11 +808,24 @@
 
         <div class="calc-out" id="calcOut" hidden>
           <div class="calc-size" id="calcSize">-</div>
-          <div class="calc-conv" id="calcConv"></div>
           <p class="calc-note" id="calcNote"></p>
         </div>
         <p class="calc-err" id="calcErr" hidden></p>
-        <p class="calc-hint">How it works: your underbust sets the band number (65, 70, 75, 80…), and the difference between bust and underbust sets the cup - roughly two centimetres per cup size.</p>
+        <div class="calc-info">
+          <div class="calc-tip" id="calcInfoBox" role="note" hidden>
+            <p><b>Band</b> = your underbust rounded to the nearest 5 cm (73–77 cm → 75, 78–82 cm → 80…).</p>
+            <p><b>Cup</b> = bust minus the band number. Every two centimetres of difference is one cup size up.</p>
+            <table class="calc-tab">
+              <tr><th>Difference</th><td>10–12</td><td>12–14</td><td>14–16</td><td>16–18</td><td>18–20</td><td>20–22</td><td>22–24</td><td>24–26</td></tr>
+              <tr><th>Cup</th><td>AA</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr>
+            </table>
+            <p>Example: 78 cm underbust and 94 cm bust → band <b>80</b>, difference <b>14 cm</b> → size <b>80B</b>.</p>
+            <p>Treat the result as a guide. Every brand cuts a little differently, which is why we always try things on here.</p>
+          </div>
+          <button type="button" class="calc-info-btn" id="calcInfoBtn" aria-expanded="false" aria-controls="calcInfoBox">
+            <span class="calc-info-ico" aria-hidden="true">i</span> How we work it out
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -1048,7 +1087,7 @@
     });
   })();
 
-  /* ---- Kalkulačka velikosti podprsenky ---- */
+  /* ---- Kalkulačka velikosti podprsenky (EU) ---- */
   (function(){
     const btn = document.getElementById('calcBtn');
     if(!btn) return;
@@ -1057,61 +1096,102 @@
     const out   = document.getElementById('calcOut');
     const err   = document.getElementById('calcErr');
     const elSize= document.getElementById('calcSize');
-    const elConv= document.getElementById('calcConv');
     const elNote= document.getElementById('calcNote');
 
-    /* Košíček podle rozdílu (obvod prsou − obvod pod prsy), v cm. */
+    /* Evropská tabulka košíčků.
+       Rozdíl = obvod prsou − číslo obvodu (tj. zaokrouhlený obvod pod prsy),
+       hranice po 2 cm, spodní mez včetně. */
+    const DEC = '.';
+    const T = {
+      empty:     'Please fill in both measurements in centimetres.',
+      rangePod:  'Enter an underbust measurement between 55 and 140 cm.',
+      rangePres: 'Enter a bust measurement between 60 and 180 cm.',
+      order:     'Your bust measurement must be larger than your underbust. Please check again.',
+      tooSmall:  'The difference works out at under 10 cm. Please check your measurements - or come in and we will help you in person.',
+      recap:     'Band <b>{b}</b>, difference against your bust <b>{d} cm</b>.',
+      edge:      'You are right on the line between two cups - try <b>{s}</b> as well.',
+      sisters:   'Sister sizes worth trying: {list}.',
+      invite:    'Come and try them on with us, no rush.'
+    };
+
     const CUPS = [
-      {max:11.5, eu:'AA', uk:'AA', us:'AA'},
-      {max:13.5, eu:'A',  uk:'A',  us:'A' },
-      {max:15.5, eu:'B',  uk:'B',  us:'B' },
-      {max:17.5, eu:'C',  uk:'C',  us:'C' },
-      {max:19.5, eu:'D',  uk:'D',  us:'D' },
-      {max:21.5, eu:'E',  uk:'DD', us:'DD'},
-      {max:23.5, eu:'F',  uk:'E',  us:'DDD/F'},
-      {max:25.5, eu:'G',  uk:'F',  us:'G' },
-      {max:27.5, eu:'H',  uk:'FF', us:'H' },
-      {max:29.5, eu:'I',  uk:'G',  us:'I' },
-      {max:31.5, eu:'J',  uk:'GG', us:'J' },
-      {max:99,   eu:'K',  uk:'H',  us:'K' }
+      {min:10, eu:'AA'}, {min:12, eu:'A'}, {min:14, eu:'B'}, {min:16, eu:'C'},
+      {min:18, eu:'D'},  {min:20, eu:'E'}, {min:22, eu:'F'}, {min:24, eu:'G'},
+      {min:26, eu:'H'},  {min:28, eu:'I'}, {min:30, eu:'J'}, {min:32, eu:'K'}
     ];
 
-    function show(msg){ err.textContent = msg; err.hidden = false; out.hidden = true; }
+    function cupFor(d){
+      let c = CUPS[0];
+      for(let k = 0; k < CUPS.length; k++){ if(d >= CUPS[k].min - 1e-9) c = CUPS[k]; }
+      return c;
+    }
+    function fmt(n){ return (Math.round(n * 10) / 10).toFixed(1).replace('.', DEC); }
+    function fail(msg){ err.textContent = msg; err.hidden = false; out.hidden = true; }
 
     btn.addEventListener('click', function(){
       const pod  = parseFloat(String(inPod.value).replace(',','.'));
       const pres = parseFloat(String(inPres.value).replace(',','.'));
-      if(!isFinite(pod) || !isFinite(pres)) return show('Please fill in both measurements in centimetres.');
-      if(pod < 55 || pod > 140)  return show('Please enter an underbust between 55 and 140 cm.');
-      if(pres <= pod)            return show('Your bust measurement must be larger than your underbust. Please check both.');
+      if(!isFinite(pod) || !isFinite(pres)) return fail(T.empty);
+      if(pod < 55 || pod > 140)             return fail(T.rangePod);
+      if(pres < 60 || pres > 180)           return fail(T.rangePres);
+      if(pres <= pod)                       return fail(T.order);
+
+      /* Číslo obvodu = obvod pod prsy zaokrouhlený na nejbližší pětku. */
+      const band = Math.min(110, Math.max(60, Math.round(pod / 5) * 5));
+      /* Košíček se počítá proti číslu obvodu, ne proti syrové míře. */
+      const diff = pres - band;
+
+      if(diff < 10) return fail(T.tooSmall);
 
       err.hidden = true;
-
-      /* Číslo obvodu = obvod pod prsy zaokrouhlený na nejbližší pětku (65, 70, 75…). */
-      const band = Math.round(pod / 5) * 5;
-      const diff = pres - pod;
-      const cup  = CUPS.find(c => diff < c.max) || CUPS[CUPS.length-1];
-
-      /* Přepočet obvodu: EU 65 = UK/US 30, každých 5 cm = 2 palcové velikosti. */
-      const bandUK = 30 + (band - 65) / 5 * 2;
+      const cup = cupFor(diff);
+      const i   = CUPS.indexOf(cup);
 
       elSize.textContent = band + ' ' + cup.eu;
-      elConv.textContent = 'EU ' + band + cup.eu + '  ·  UK ' + bandUK + cup.uk + '  ·  US ' + bandUK + cup.us;
 
-      /* Sesterské velikosti. */
-      const iCup = CUPS.indexOf(cup);
+      const parts = [T.recap.replace('{b}', band).replace('{d}', fmt(diff))];
+
+      /* Hraniční hodnota - nabídneme i sousední košíček. */
+      const up = CUPS[i+1];
+      if(up && (up.min - diff) <= 0.5){
+        parts.push(T.edge.replace('{s}', band + up.eu));
+      } else if(i > 0 && (diff - cup.min) <= 0.5){
+        parts.push(T.edge.replace('{s}', band + CUPS[i-1].eu));
+      }
+
+      /* Sesterské velikosti: o obvod dolů = košíček nahoru a naopak. */
       const sis = [];
-      if(band > 60 && iCup < CUPS.length-1) sis.push((band-5) + CUPS[iCup+1].eu);
-      if(iCup > 0)                          sis.push((band+5) + CUPS[iCup-1].eu);
-      elNote.innerHTML = 'The difference is ' + diff.toFixed(1) + ' cm.'
-        + (sis.length ? ' Sister sizes worth trying: <b>' + sis.join('</b>, <b>') + '</b>.' : '')
-        + ' Come in and try them on at your leisure.';
+      if(band > 60  && CUPS[i+1]) sis.push((band - 5) + CUPS[i+1].eu);
+      if(band < 110 && i > 0)     sis.push((band + 5) + CUPS[i-1].eu);
+      if(sis.length) parts.push(T.sisters.replace('{list}', '<b>' + sis.join('</b>, <b>') + '</b>'));
+
+      parts.push(T.invite);
+      elNote.innerHTML = parts.join(' ');
       out.hidden = false;
     });
 
-    [inPod, inPres].forEach(i => i.addEventListener('keydown', e => {
-      if(e.key === 'Enter'){ e.preventDefault(); btn.click(); }
-    }));
+    [inPod, inPres].forEach(function(i){
+      i.addEventListener('keydown', function(e){
+        if(e.key === 'Enter'){ e.preventDefault(); btn.click(); }
+      });
+    });
+
+    /* ---- Tooltip se vzorcem ---- */
+    const iBtn = document.getElementById('calcInfoBtn');
+    const iBox = document.getElementById('calcInfoBox');
+    if(iBtn && iBox){
+      function setTip(open){
+        iBox.hidden = !open;
+        iBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      iBtn.addEventListener('click', function(e){ e.stopPropagation(); setTip(iBox.hidden); });
+      document.addEventListener('click', function(e){
+        if(!iBox.hidden && !iBox.contains(e.target) && e.target !== iBtn) setTip(false);
+      });
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && !iBox.hidden){ setTip(false); iBtn.focus(); }
+      });
+    }
   })();
 
   /* ---- Mobilní menu ---- */
