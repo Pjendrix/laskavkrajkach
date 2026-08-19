@@ -263,9 +263,26 @@
   .about-text p.about-close{font-family:var(--f-display);font-weight:300;
     font-size:clamp(26px,4.2vw,52px);line-height:1.25;text-align:center;
     color:var(--text-primary);margin:0;letter-spacing:.01em}
-  .about-sign{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px}
-  .about-sign .sign-mono{height:clamp(56px,6vw,78px);width:auto;color:var(--mauve)}
-  .about-sign .sign-heart{height:clamp(20px,2.2vw,28px);width:auto;color:var(--wine)}
+  .about-sign{display:flex;align-items:center;justify-content:center;margin-top:26px}
+  .about-sign img{display:block;width:clamp(96px,11vw,140px);height:auto;opacity:.9}
+  .brandlist-cap{font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--text-secondary);margin:0 0 14px}
+  /* ---------- Značky - logotypy ---------- */
+  .brandlist{margin-top:34px}
+  .brandlist-grid{display:grid;grid-template-columns:repeat(3,1fr);
+    gap:1px;background:var(--mauve);border:1px solid var(--mauve)}
+  .brandlist-item{display:flex;align-items:center;justify-content:center;
+    background:var(--cream);min-height:74px;padding:16px 12px;text-align:center}
+  .brandlist-item img{max-width:100%;max-height:34px;width:auto;height:auto;
+    opacity:.62;filter:grayscale(1);transition:opacity .3s ease,filter .3s ease}
+  .brandlist-item:hover img{opacity:1;filter:grayscale(0)}
+  .brandlist-item span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--text-secondary)}
+  @media (max-width:900px){
+    .brandlist-grid{grid-template-columns:repeat(2,1fr)}
+    .brandlist-item{min-height:64px}
+    .brandlist-item img{max-height:28px}
+  }
 
   /* ---------- Kalkulačka velikosti ---------- */
   .calc{background:var(--cream);border:1px solid var(--border);padding:38px 36px}
@@ -601,7 +618,7 @@
     <div class="drawer-meta">
       Štěpánská 4, 120 00 Praha 2<br>
       Po–Pá 10–18<br>
-      <a href="tel:+420608703703">+420 608 703 703</a><br>
+      <a href="tel:+420725062474">+420 725 062 474</a><br>
       <a href="mailto:info@laskavkrajkach.cz">info@laskavkrajkach.cz</a>
       <div class="lang" style="margin-top:22px">
         <a href="/" aria-current="true" hreflang="cs" lang="cs">CZ</a>
@@ -648,9 +665,6 @@
       <span class="eyebrow">Butik spodního prádla - s prodejem plavek po celý rok!</span>
       <h1>Krajka, která zůstane vaše tajemství.</h1>
       <p>Spodní prádlo, plavky a doplňky vybírané kus po kuse. Přijďte si pro střih, který sedne.</p>
-      <div class="actions">
-        <a href="#sortiment" class="btn btn-primary">Prohlédnout sortiment</a>
-      </div>
     </div>
   </div>
 </section>
@@ -710,7 +724,48 @@
       <span class="eyebrow">Vybíráme kus po kuse</span>
       <h2>Značky, kterým věříme</h2>
       <p>Nakupujeme u různých značek z Evropy a vybíráme pro vás ty nejkvalitnější za rozumnou cenu, kterým rozumíme.</p>
-      <a href="#kontakt" class="btn btn-secondary">Přijďte si je vyzkoušet</a>
+      <div class="brandlist reveal">
+        <p class="brandlist-cap">Značky u nás v butiku</p>
+        <div class="brandlist-grid">
+        <div class="brandlist-item">
+          <img src="img/znacky/sunflair.webp" alt="Sunflair" loading="lazy" decoding="async"
+               onerror="this.insertAdjacentHTML('afterend','<span>Sunflair</span>');this.remove()">
+        </div>
+        <div class="brandlist-item">
+          <img src="img/znacky/lisca.webp" alt="Lisca" loading="lazy" decoding="async"
+               onerror="this.insertAdjacentHTML('afterend','<span>Lisca</span>');this.remove()">
+        </div>
+        <div class="brandlist-item">
+          <img src="img/znacky/skiny.webp" alt="Skiny" loading="lazy" decoding="async"
+               onerror="this.insertAdjacentHTML('afterend','<span>Skiny</span>');this.remove()">
+        </div>
+        <div class="brandlist-item">
+          <img src="img/znacky/opera.webp" alt="Opera" loading="lazy" decoding="async"
+               onerror="this.insertAdjacentHTML('afterend','<span>Opera</span>');this.remove()">
+        </div>
+        <div class="brandlist-item">
+          <img src="img/znacky/anita.webp" alt="Anita" loading="lazy" decoding="async"
+               onerror="this.insertAdjacentHTML('afterend','<span>Anita</span>');this.remove()">
+        </div>
+        <div class="brandlist-item">
+          <img src="img/znacky/dkny.webp" alt="DKNY" loading="lazy" decoding="async"
+               onerror="this.insertAdjacentHTML('afterend','<span>DKNY</span>');this.remove()">
+        </div>
+        <div class="brandlist-item">
+          <img src="img/znacky/schiesser.webp" alt="Schiesser" loading="lazy" decoding="async"
+               onerror="this.insertAdjacentHTML('afterend','<span>Schiesser</span>');this.remove()">
+        </div>
+        <div class="brandlist-item">
+          <img src="img/znacky/huber.webp" alt="Huber" loading="lazy" decoding="async"
+               onerror="this.insertAdjacentHTML('afterend','<span>Huber</span>');this.remove()">
+        </div>
+        <div class="brandlist-item">
+          <img src="img/znacky/sans-complexe.webp" alt="Sans Complexe" loading="lazy" decoding="async"
+               onerror="this.insertAdjacentHTML('afterend','<span>Sans Complexe</span>');this.remove()">
+        </div>
+        </div>
+      </div>
+      <a href="#kontakt" class="btn btn-secondary" style="margin-top:30px">Přijďte si je vyzkoušet</a>
     </div>
   </div>
 </section>
@@ -734,9 +789,9 @@
       <div class="lace about-lace" aria-hidden="true"></div>
       <p class="about-close">Těšíme se na vaši návštěvu.</p>
     </div>
-    <div class="about-sign reveal" aria-hidden="true">
-      <span class="sign-mono ico ico-mono" aria-hidden="true"></span>
-      <span class="sign-heart ico ico-heart" aria-hidden="true"></span>
+    <div class="about-sign reveal">
+      <img src="img/logo-kolecko.webp" width="640" height="640"
+           alt="Znak Láska v krajkách - písmeno L se srdcem" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -856,7 +911,7 @@
         <address>
           Štěpánská 4, 120 00 Praha 2<br>
           Po–Pá 10–18<br>
-          <a href="tel:+420608703703">+420 608 703 703</a><br>
+          <a href="tel:+420725062474">+420 725 062 474</a><br>
           <a href="mailto:info@laskavkrajkach.cz">info@laskavkrajkach.cz</a><br>
           <a href="https://www.laskavkrajkach.cz">www.laskavkrajkach.cz</a>
         </address>
@@ -888,7 +943,7 @@
         <div class="write-direct">
           Raději napřímo?<br>
           <a href="mailto:info@laskavkrajkach.cz">info@laskavkrajkach.cz</a><br>
-          <a href="tel:+420608703703">+420 608 703 703</a><br>
+          <a href="tel:+420725062474">+420 725 062 474</a><br>
           Po–Pá 10–18
           <div class="social" style="margin-top:22px">
             <a href="https://www.instagram.com/laskavkrajkach/" target="_blank" rel="noopener noreferrer"
@@ -955,7 +1010,7 @@
           <span class="form-done-mark ico ico-heart" aria-hidden="true"></span>
           <h3>Děkujeme za zprávu</h3>
           <p>Ozveme se obvykle do druhého pracovního dne. Když to spěchá, zavolejte na
-            <a href="tel:+420608703703">+420 608 703 703</a>.</p>
+            <a href="tel:+420725062474">+420 725 062 474</a>.</p>
         </div>
       </div>
     </div>
@@ -1014,7 +1069,7 @@
       <div>
         <h4>Kontakt</h4>
         <ul>
-          <li><a href="tel:+420608703703">+420 608 703 703</a></li>
+          <li><a href="tel:+420725062474">+420 725 062 474</a></li>
           <li><a href="mailto:info@laskavkrajkach.cz">info@laskavkrajkach.cz</a></li>
         </ul>
       </div>
