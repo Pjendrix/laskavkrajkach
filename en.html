@@ -231,7 +231,21 @@
   .cats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
   .cat-tile{aspect-ratio:3/4;background:var(--bg-tile);position:relative;overflow:hidden;
     margin-bottom:18px;display:flex;align-items:center;justify-content:center}
-  .cat-tile .watermark{width:44%;max-width:120px;opacity:.22}
+  .cat-tile .watermark{width:44%;max-width:120px;opacity:.22;z-index:0}
+  .cat-tile .tile-photo{z-index:1}
+  .cat-tile::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+    opacity:0;transition:opacity .4s ease;
+    background:linear-gradient(to top,rgba(58,45,42,.34),rgba(58,45,42,0) 42%)}
+  .cat-tile.has-photo::after{opacity:1}
+  .tile-mark{position:absolute;right:14px;bottom:14px;width:30px;height:auto;z-index:3;
+    display:block;
+    color:var(--cream);opacity:0;transition:opacity .4s ease,transform .4s ease;
+    filter:drop-shadow(0 2px 6px rgba(58,45,42,.4))}
+  .cat-tile.has-photo .tile-mark{opacity:.9}
+  .cat-tile:hover .tile-mark{transform:scale(1.12)}
+  @media (max-width:900px){
+    .tile-mark{width:26px;right:11px;bottom:11px}
+  }
   .cat h3{font-size:22px;margin-bottom:4px}
   .cat p{font-size:13px;color:var(--text-secondary)}
 
@@ -711,22 +725,22 @@
     </div>
     <div class="cats">
       <article class="cat reveal">
-        <div class="cat-tile"><span class="watermark ico ico-heart" aria-hidden="true" style="color:var(--mauve)"></span><img class="tile-photo" src="img/sortiment-podprsenky.jpg" alt="Bras at the Láska v krajkách boutique" loading="lazy" decoding="async" onerror="this.remove()"></div>
+        <div class="cat-tile"><span class="watermark ico ico-heart" aria-hidden="true" style="color:var(--mauve)"></span><img class="tile-photo" src="img/sortiment-podprsenky.jpg" alt="Bras at the Láska v krajkách boutique" loading="lazy" decoding="async" onload="this.closest('.cat-tile').classList.add('has-photo')" onerror="this.remove()"><span class="tile-mark ico ico-heart" aria-hidden="true"></span></div>
         <h3>Bras</h3>
         <p>From cup A to J. Lace, smooth cuts and seamless everyday styles.</p>
       </article>
       <article class="cat reveal">
-        <div class="cat-tile"><span class="watermark ico ico-heart" aria-hidden="true" style="color:var(--mauve)"></span><img class="tile-photo" src="img/sortiment-kalhotky.jpg" alt="Briefs at the Láska v krajkách boutique" loading="lazy" decoding="async" onerror="this.remove()"></div>
+        <div class="cat-tile"><span class="watermark ico ico-heart" aria-hidden="true" style="color:var(--mauve)"></span><img class="tile-photo" src="img/sortiment-kalhotky.jpg" alt="Briefs at the Láska v krajkách boutique" loading="lazy" decoding="async" onload="this.closest('.cat-tile').classList.add('has-photo')" onerror="this.remove()"><span class="tile-mark ico ico-heart" aria-hidden="true"></span></div>
         <h3>Briefs</h3>
         <p>Brazilians, thongs and classics - we will always find the matching piece.</p>
       </article>
       <article class="cat reveal">
-        <div class="cat-tile"><span class="watermark ico ico-heart" aria-hidden="true" style="color:var(--mauve)"></span><img class="tile-photo" src="img/sortiment-plavky.jpg" alt="Swimwear at the Láska v krajkách boutique" loading="lazy" decoding="async" onerror="this.remove()"></div>
+        <div class="cat-tile"><span class="watermark ico ico-heart" aria-hidden="true" style="color:var(--mauve)"></span><img class="tile-photo" src="img/sortiment-plavky.jpg" alt="Swimwear at the Láska v krajkách boutique" loading="lazy" decoding="async" onload="this.closest('.cat-tile').classList.add('has-photo')" onerror="this.remove()"><span class="tile-mark ico ico-heart" aria-hidden="true"></span></div>
         <h3>Swimwear</h3>
         <p>Two-piece and one-piece, sized by cup as well as band.</p>
       </article>
       <article class="cat reveal">
-        <div class="cat-tile"><span class="watermark ico ico-heart" aria-hidden="true" style="color:var(--mauve)"></span><img class="tile-photo" src="img/sortiment-doplnky.jpg" alt="Hosiery and accessories at the Láska v krajkách boutique" loading="lazy" decoding="async" onerror="this.remove()"></div>
+        <div class="cat-tile"><span class="watermark ico ico-heart" aria-hidden="true" style="color:var(--mauve)"></span><img class="tile-photo" src="img/sortiment-doplnky.jpg" alt="Hosiery and accessories at the Láska v krajkách boutique" loading="lazy" decoding="async" onload="this.closest('.cat-tile').classList.add('has-photo')" onerror="this.remove()"><span class="tile-mark ico ico-heart" aria-hidden="true"></span></div>
         <h3>Accessories</h3>
         <p>Hosiery, suspenders and detergents for delicate fabrics.</p>
       </article>
