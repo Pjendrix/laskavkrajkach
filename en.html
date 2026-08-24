@@ -261,29 +261,27 @@
   .lookbook-copy p{margin-bottom:32px;max-width:40ch;color:var(--text-secondary)}
 
   /* ---------- Galerie v panelu Značky ---------- */
-  .gallery{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:20px;padding:52px 64px}
-  .gallery-stage{position:relative;width:100%;max-width:400px;flex:none;height:340px;
+  .gallery{position:absolute;inset:0;z-index:1;display:flex;flex-direction:row;
+    align-items:center;justify-content:center;gap:10px;padding:52px 20px}
+  .gallery-stage{position:relative;width:100%;max-width:360px;flex:0 1 360px;height:340px;
     transition:height .65s cubic-bezier(.4,0,.2,1)}
   .gallery-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
     opacity:0;transition:opacity .85s ease;pointer-events:none;
     filter:drop-shadow(0 16px 34px rgba(58,45,42,.22))}
   .gallery-slide.is-on{opacity:1}
 
-  .gallery-bar{display:flex;align-items:center;justify-content:center;gap:8px;flex:none}
-  .gallery-nav{width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  .gallery-nav{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;
     padding:0;border:0;background:none;cursor:pointer;color:var(--text-secondary);
     transition:color .25s ease,transform .25s ease}
   .gallery-nav:hover{color:var(--wine);transform:scale(1.12)}
   .gallery-nav:focus-visible{outline:2px solid var(--wine);outline-offset:2px}
   .gallery-nav svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.4}
-  .gallery-count{font-size:11px;letter-spacing:.18em;color:var(--text-secondary);
-    min-width:66px;text-align:center;font-variant-numeric:tabular-nums}
   .gallery:not(.has-photos){display:none}
-  .gallery.single .gallery-bar{display:none}
+  .gallery.single .gallery-nav{visibility:hidden}
   @media (max-width:900px){
-    .gallery{padding:36px 20px;gap:14px}
-    .gallery-stage{max-width:340px;height:300px}
+    .gallery{padding:36px 6px;gap:2px}
+    .gallery-stage{max-width:300px;height:300px}
+    .gallery-nav{width:38px;height:44px}
   }
   @media (prefers-reduced-motion:reduce){
     .gallery-slide{transition:opacity .01ms}
@@ -763,12 +761,10 @@
         </svg>
       </div>
       <div class="gallery" id="galerie" data-dir="img/galerie/" aria-label="Boutique gallery" role="region">
+        <button type="button" class="gallery-nav" data-dir="-1" aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 L7 12 L15 20"/></svg></button>
         <div class="gallery-stage"></div>
-        <div class="gallery-bar">
-          <button type="button" class="gallery-nav" data-dir="-1" aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 L7 12 L15 20"/></svg></button>
-          <span class="gallery-count" aria-live="polite"></span>
-          <button type="button" class="gallery-nav" data-dir="1" aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 L17 12 L9 20"/></svg></button>
-        </div>
+        <button type="button" class="gallery-nav" data-dir="1" aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 L17 12 L9 20"/></svg></button>
+      </div>
       </div>
     </div>
     <div class="lookbook-copy reveal">
@@ -1333,7 +1329,7 @@
     if(!box) return;
     const dir   = box.dataset.dir || 'img/galerie/';
     const stage = box.querySelector('.gallery-stage');
-    const count = box.querySelector('.gallery-count');
+    const count = box.querySelector('.gallery-count'); /* volitelne */
     const EXT   = ['jpg','jpeg','webp','png','JPG','JPEG','PNG'];
     const MAX   = 40;     /* nejvyssi hledane cislo */
     const GAP   = 5;      /* po kolika chybejicich se hledani ukonci */
@@ -1361,9 +1357,7 @@
     function maxHeight(){
       const cs = getComputedStyle(box);
       const pad = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
-      const bar = box.querySelector('.gallery-bar');
-      const barH = (bar && slides.length > 1) ? bar.offsetHeight + 20 : 0;
-      return Math.max(200, box.clientHeight - pad - barH);
+      return Math.max(200, box.clientHeight - pad);
     }
     function fit(){
       if(idx < 0) return;
@@ -1390,6 +1384,7 @@
       if(idx >= 0) label();
     }
     function label(){
+      if(!count) return;
       count.textContent = String(idx + 1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
     }
     function show(i){
