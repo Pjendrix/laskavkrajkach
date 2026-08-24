@@ -20,3 +20,13 @@ Doporučení:
 
 Chybějící logo web nerozbije: pokud soubor neexistuje, na jeho místě
 se automaticky zobrazí název značky textem.
+
+--- AKTUALIZACE ---
+Loga jsou nyní nahraná jako .webp s průhledným pozadím,
+sjednocená na plátno 600 x 200 px s optickým vyvážením velikostí:
+sunflair, lisca, skiny, opera, anita, dkny, schiesser, sans-complexe
+
+CHYBÍ JEŠTĚ: huber.webp
+Dokud soubor nedodáte, zobrazí se v mřížce textový nápis HUBER.
+Stačí nahrát huber.webp (nejlépe také 600 x 200 px, průhledné pozadí)
+a projeví se automaticky.
