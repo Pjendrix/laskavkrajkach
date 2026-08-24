@@ -262,7 +262,7 @@
 
   /* ---------- Galerie v panelu Značky ---------- */
   .gallery{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:20px;padding:52px 64px}
+    align-items:center;justify-content:center;gap:0;padding:52px 64px}
   .gallery-stage{position:relative;width:100%;max-width:400px;flex:none;height:340px;
     transition:height .65s cubic-bezier(.4,0,.2,1)}
   .gallery-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
@@ -270,20 +270,24 @@
     filter:drop-shadow(0 16px 34px rgba(58,45,42,.22))}
   .gallery-slide.is-on{opacity:1}
 
-  .gallery-bar{display:flex;align-items:center;justify-content:center;gap:8px;flex:none}
-  .gallery-nav{width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  .gallery-bar{position:absolute;top:50%;left:50%;width:min(100%,560px);
+    transform:translate(-50%,-50%);display:flex;align-items:center;
+    justify-content:space-between;padding:0 4px;pointer-events:none;z-index:4}
+  .gallery-nav{width:38px;height:38px;display:flex;align-items:center;justify-content:center;
     padding:0;border:0;background:none;cursor:pointer;color:var(--text-secondary);
-    transition:color .25s ease,transform .25s ease}
-  .gallery-nav:hover{color:var(--wine);transform:scale(1.12)}
+    pointer-events:auto;opacity:.75;
+    transition:color .25s ease,transform .25s ease,opacity .25s ease}
+  .gallery-nav:hover{color:var(--wine);opacity:1;transform:scale(1.14)}
   .gallery-nav:focus-visible{outline:2px solid var(--wine);outline-offset:2px}
-  .gallery-nav svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.4}
-  .gallery-count{font-size:11px;letter-spacing:.18em;color:var(--text-secondary);
-    min-width:66px;text-align:center;font-variant-numeric:tabular-nums}
+  .gallery-nav svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.4}
+  .gallery-count{display:none}
   .gallery:not(.has-photos){display:none}
   .gallery.single .gallery-bar{display:none}
   @media (max-width:900px){
-    .gallery{padding:36px 20px;gap:14px}
-    .gallery-stage{max-width:340px;height:300px}
+    .gallery{padding:36px 20px;gap:0}
+    .gallery-stage{max-width:300px;height:300px}
+    .gallery-bar{width:100%;padding:0}
+    .gallery-nav{width:34px;height:34px}
   }
   @media (prefers-reduced-motion:reduce){
     .gallery-slide{transition:opacity .01ms}
@@ -1400,6 +1404,12 @@
       fit();
     }
     function step(d){ show(idx + d); restart(); }
+    function shuffle(){
+      for(let i = slides.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [slides[i], slides[j]] = [slides[j], slides[i]];
+      }
+    }
     function restart(){
       clearInterval(timer);
       if(slides.length < 2) return;
@@ -1437,15 +1447,17 @@
         if(r.ok){
           const list = await r.json();
           if(Array.isArray(list) && list.length){
-            for(const f of list){
-              const src = /^https?:|^\//.test(f) ? f : dir + f;
-              const im = await probe(src);
-              if(im) addSlide(im);
+            const srcs = list.map(f => /^https?:|^\//.test(f) ? f : dir + encodeURIComponent(f));
+            const res  = await Promise.all(srcs.map(probe));
+            const bad  = [];
+            res.forEach((im,n)=>{ if(im){ addSlide(im); } else { bad.push(list[n]); } });
+            if(bad.length){
+              console.warn('Galerie: tyto soubory se nepodarilo nacist (zkontrolujte presny nazev, zalezi na velikosti pismen):', bad);
             }
-            return;
+            if(slides.length) return;
           }
         }
-      }catch(e){}
+      }catch(e){ console.warn('Galerie: galerie.json se nepodarilo nacist', e); }
 
       /* 2) jinak se hledaji cislovane soubory 01, 02, 03 ... */
       let misses = 0;
@@ -1457,7 +1469,7 @@
         else { misses++; if(misses >= GAP) break; }
       }
     }
-    scan();
+    scan().then(()=>{ if(slides.length > 1){ shuffle(); show(0); restart(); } });
   })();
 </script>
 </body>
