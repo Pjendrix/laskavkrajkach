@@ -246,6 +246,26 @@
   .lookbook-copy h2{margin:14px 0 20px}
   .lookbook-copy p{margin-bottom:32px;max-width:40ch;color:var(--text-secondary)}
 
+  /* ---------- Galerie v panelu Značky ---------- */
+  .gallery{position:absolute;inset:0;overflow:hidden;z-index:1}
+  .gallery-slide{position:absolute;inset:0;background-size:cover;background-position:center;
+    opacity:0;transition:opacity 1.4s ease;will-change:opacity,transform}
+  .gallery-slide.is-on{opacity:1;animation:galKen 9s ease-out forwards}
+  @keyframes galKen{from{transform:scale(1.03)}to{transform:scale(1.10)}}
+  .gallery-dots{position:absolute;left:0;right:0;bottom:20px;z-index:3;
+    display:flex;gap:8px;justify-content:center}
+  .gallery-dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;
+    background:rgba(244,238,229,.45);cursor:pointer;transition:background .3s ease,transform .3s ease}
+  .gallery-dots button.on{background:var(--cream);transform:scale(1.35)}
+  .gallery-veil{position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(to top,rgba(58,45,42,.24),rgba(58,45,42,0) 45%)}
+  .gallery:not(.has-photos) .gallery-veil,
+  .gallery:not(.has-photos) .gallery-dots{display:none}
+  @media (prefers-reduced-motion:reduce){
+    .gallery-slide.is-on{animation:none}
+    .gallery-slide{transition:opacity .01ms}
+  }
+
 
   /* ---------- O nás ---------- */
   .about{background:var(--bg-page)}
@@ -272,16 +292,16 @@
   .brandlist-grid{display:grid;grid-template-columns:repeat(3,1fr);
     gap:1px;background:var(--mauve);border:1px solid var(--mauve)}
   .brandlist-item{display:flex;align-items:center;justify-content:center;
-    background:var(--cream);min-height:74px;padding:16px 12px;text-align:center}
-  .brandlist-item img{max-width:100%;max-height:34px;width:auto;height:auto;
+    background:var(--cream);min-height:88px;padding:14px 12px;text-align:center}
+  .brandlist-item img{width:100%;max-width:150px;height:auto;display:block;
     opacity:.62;filter:grayscale(1);transition:opacity .3s ease,filter .3s ease}
   .brandlist-item:hover img{opacity:1;filter:grayscale(0)}
   .brandlist-item span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--text-secondary)}
   @media (max-width:900px){
     .brandlist-grid{grid-template-columns:repeat(2,1fr)}
-    .brandlist-item{min-height:64px}
-    .brandlist-item img{max-height:28px}
+    .brandlist-item{min-height:76px}
+    .brandlist-item img{max-width:126px}
   }
 
   /* ---------- Kalkulačka velikosti ---------- */
@@ -718,7 +738,10 @@
           <path d="M420 -60 C455 120 380 240 300 330 C220 420 250 560 340 660 C400 726 470 780 520 860"/>
         </svg>
       </div>
-      <img class="tile-photo" src="img/interier-butiku.jpg" alt="Interiér butiku Láska v krajkách ve Štěpánské ulici" loading="lazy" decoding="async" onerror="this.remove()">
+      <div class="gallery" id="galerie" data-dir="img/galerie/" aria-label="Galerie z butiku" role="region">
+        <div class="gallery-veil" aria-hidden="true"></div>
+        <div class="gallery-dots" aria-hidden="true"></div>
+      </div>
     </div>
     <div class="lookbook-copy reveal">
       <span class="eyebrow">Vybíráme kus po kuse</span>
@@ -1274,6 +1297,100 @@
     drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
     addEventListener('keydown', e => { if(e.key === 'Escape' && drawer.classList.contains('open')) close(); });
     addEventListener('resize', ()=>{ if(innerWidth > 1000 && drawer.classList.contains('open')) close(); });
+  })();
+
+  /* ---- Automatická galerie (img/galerie/) ---- */
+  (function(){
+    const box = document.getElementById('galerie');
+    if(!box) return;
+    const dir  = box.dataset.dir || 'img/galerie/';
+    const dots = box.querySelector('.gallery-dots');
+    const EXT  = ['jpg','jpeg','webp','png','JPG','JPEG','PNG'];
+    const MAX  = 40;          // nejvyšší číslo, které se hledá
+    const GAP  = 5;           // po kolika chybějících číslech se hledání ukončí
+    const DELAY = 6000;       // jak dlouho se drží jedna fotka (ms)
+
+    const slides = [];
+    let idx = -1, timer = null;
+
+    function tryLoad(src){
+      return new Promise(res=>{
+        const im = new Image();
+        im.onload  = ()=>res(src);
+        im.onerror = ()=>res(null);
+        im.src = src;
+      });
+    }
+    async function findOne(base){
+      for(const e of EXT){
+        const hit = await tryLoad(dir + base + '.' + e);
+        if(hit) return hit;
+      }
+      return null;
+    }
+    function addSlide(src){
+      const d = document.createElement('div');
+      d.className = 'gallery-slide';
+      d.style.backgroundImage = 'url("' + src.replace(/"/g,'%22') + '")';
+      box.insertBefore(d, box.firstChild);
+      slides.push(d);
+
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label','Fotografie ' + slides.length);
+      const my = slides.length - 1;
+      b.addEventListener('click', ()=>{ show(my); restart(); });
+      dots.appendChild(b);
+
+      box.classList.add('has-photos');
+      if(slides.length === 1){ show(0); }
+      if(slides.length === 2){ restart(); }
+      dots.style.display = slides.length > 1 ? 'flex' : 'none';
+    }
+    function show(i){
+      if(!slides.length) return;
+      idx = (i + slides.length) % slides.length;
+      slides.forEach((s,n)=>s.classList.toggle('is-on', n === idx));
+      [...dots.children].forEach((d,n)=>d.classList.toggle('on', n === idx));
+    }
+    function restart(){
+      clearInterval(timer);
+      if(slides.length < 2) return;
+      timer = setInterval(()=>show(idx+1), DELAY);
+    }
+    box.addEventListener('mouseenter', ()=>clearInterval(timer));
+    box.addEventListener('mouseleave', restart);
+    document.addEventListener('visibilitychange', ()=>{
+      if(document.hidden){ clearInterval(timer); } else { restart(); }
+    });
+
+    async function scan(){
+      /* 1) volitelný seznam img/galerie/galerie.json  ->  ["a.jpg","b.jpg"] */
+      try{
+        const r = await fetch(dir + 'galerie.json', {cache:'no-store'});
+        if(r.ok){
+          const list = await r.json();
+          if(Array.isArray(list) && list.length){
+            for(const f of list){
+              const src = /^https?:|^\//.test(f) ? f : dir + f;
+              if(await tryLoad(src)) addSlide(src);
+            }
+            return;
+          }
+        }
+      }catch(e){}
+
+      /* 2) jinak se hledají číslované soubory 01.jpg, 02.jpg, ... (i 1.jpg) */
+      let misses = 0;
+      for(let i=1; i<=MAX; i++){
+        const pad = String(i).padStart(2,'0');
+        let hit = await findOne(pad);
+        if(!hit && pad !== String(i)) hit = await findOne(String(i));
+        if(hit){ addSlide(hit); misses = 0; }
+        else { misses++; if(misses >= GAP) break; }
+      }
+    }
+    scan();
   })();
 </script>
 </body>
