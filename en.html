@@ -574,6 +574,15 @@
     .nav{justify-content:space-between}
     .nav-brand{display:inline-flex}
   }
+  /* Značky: udrž dvousloupcový layout i na užších oknech (881-1000 px) */
+  @media (min-width:881px) and (max-width:1000px){
+    .lookbook-grid{grid-template-columns:1fr 1fr}
+    .lookbook-panel{min-height:520px;order:0}
+    .lookbook-copy{order:0;padding:56px 40px}
+    .gallery{padding:40px 8px;gap:4px}
+    .gallery-stage{max-width:260px;flex:0 1 260px}
+    .gallery-nav{width:36px}
+  }
   @media(max-width:600px){
     .wrap{padding:0 24px}
     section{padding:68px 0}
