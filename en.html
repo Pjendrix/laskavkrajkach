@@ -923,13 +923,13 @@
         <p class="calc-err" id="calcErr" hidden></p>
         <div class="calc-info">
           <div class="calc-tip" id="calcInfoBox" role="note" hidden>
-            <p><b>Band</b> = your underbust rounded to the nearest 5 cm (73–77 cm → 75, 78–82 cm → 80…).</p>
+            <p><b>Band</b> = your underbust minus 5 cm, rounded down to the nearest 5 (83–87 cm → 78–82 → <b>80</b>).</p>
             <p><b>Cup</b> = bust minus the band number. Every two centimetres of difference is one cup size up.</p>
             <table class="calc-tab">
               <tr><th>Difference</th><td>10–12</td><td>12–14</td><td>14–16</td><td>16–18</td><td>18–20</td><td>20–22</td><td>22–24</td><td>24–26</td></tr>
               <tr><th>Cup</th><td>AA</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr>
             </table>
-            <p>Example: 78 cm underbust and 94 cm bust → band <b>80</b>, difference <b>14 cm</b> → size <b>80B</b>.</p>
+            <p>Example: 78 cm underbust and 94 cm bust → 78 − 5 = 73 → band <b>70</b>, difference <b>24 cm</b> → size <b>70G</b>.</p>
             <p>Treat the result as a guide. Every brand cuts a little differently, which is why we always try things on here.</p>
           </div>
           <button type="button" class="calc-info-btn" id="calcInfoBtn" aria-expanded="false" aria-controls="calcInfoBox">
@@ -1227,7 +1227,8 @@
     const CUPS = [
       {min:10, eu:'AA'}, {min:12, eu:'A'}, {min:14, eu:'B'}, {min:16, eu:'C'},
       {min:18, eu:'D'},  {min:20, eu:'E'}, {min:22, eu:'F'}, {min:24, eu:'G'},
-      {min:26, eu:'H'},  {min:28, eu:'I'}, {min:30, eu:'J'}, {min:32, eu:'K'}
+      {min:26, eu:'H'},  {min:28, eu:'I'}, {min:30, eu:'J'}, {min:32, eu:'K'},
+      {min:34, eu:'L'},  {min:36, eu:'M'}, {min:38, eu:'N'}
     ];
 
     function cupFor(d){
@@ -1246,8 +1247,9 @@
       if(pres < 60 || pres > 180)           return fail(T.rangePres);
       if(pres <= pod)                       return fail(T.order);
 
-      /* Číslo obvodu = obvod pod prsy zaokrouhlený na nejbližší pětku. */
-      const band = Math.min(110, Math.max(60, Math.round(pod / 5) * 5));
+      /* Band (Le Chaton method): subtract 5 cm from the underbust
+         and round down to the nearest 5. */
+      const band = Math.min(110, Math.max(60, Math.floor((pod - 5) / 5) * 5));
       /* Košíček se počítá proti číslu obvodu, ne proti syrové míře. */
       const diff = pres - band;
 
