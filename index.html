@@ -1224,17 +1224,18 @@
       invite:    'Pojďte si je k nám v klidu vyzkoušet.'
     };
 
+    /* max = horní hranice rozdílu včetně; košíček sedí na hranici dolů
+       (rozdíl 22 cm => E, nikoli F). */
     const CUPS = [
-      {min:10, eu:'AA'}, {min:12, eu:'A'}, {min:14, eu:'B'}, {min:16, eu:'C'},
-      {min:18, eu:'D'},  {min:20, eu:'E'}, {min:22, eu:'F'}, {min:24, eu:'G'},
-      {min:26, eu:'H'},  {min:28, eu:'I'}, {min:30, eu:'J'}, {min:32, eu:'K'},
-      {min:34, eu:'L'},  {min:36, eu:'M'}, {min:38, eu:'N'}
+      {max:12, eu:'AA'}, {max:14, eu:'A'}, {max:16, eu:'B'}, {max:18, eu:'C'},
+      {max:20, eu:'D'},  {max:22, eu:'E'}, {max:24, eu:'F'}, {max:26, eu:'G'},
+      {max:28, eu:'H'},  {max:30, eu:'I'}, {max:32, eu:'J'}, {max:34, eu:'K'},
+      {max:36, eu:'L'},  {max:38, eu:'M'}, {max:40, eu:'N'}
     ];
 
     function cupFor(d){
-      let c = CUPS[0];
-      for(let k = 0; k < CUPS.length; k++){ if(d >= CUPS[k].min - 1e-9) c = CUPS[k]; }
-      return c;
+      for(let k = 0; k < CUPS.length; k++){ if(d <= CUPS[k].max + 1e-9) return CUPS[k]; }
+      return CUPS[CUPS.length - 1];
     }
     function fmt(n){ return (Math.round(n * 10) / 10).toFixed(1).replace('.', DEC); }
     function fail(msg){ err.textContent = msg; err.hidden = false; out.hidden = true; }
@@ -1265,9 +1266,9 @@
 
       /* Hraniční hodnota - nabídneme i sousední košíček. */
       const up = CUPS[i+1];
-      if(up && (up.min - diff) <= 0.5){
+      if(up && (cup.max - diff) <= 0.5){
         parts.push(T.edge.replace('{s}', band + up.eu));
-      } else if(i > 0 && (diff - cup.min) <= 0.5){
+      } else if(i > 0 && (diff - (cup.max - 2)) <= 0.5){
         parts.push(T.edge.replace('{s}', band + CUPS[i-1].eu));
       }
 
