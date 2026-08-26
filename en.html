@@ -924,12 +924,12 @@
         <div class="calc-info">
           <div class="calc-tip" id="calcInfoBox" role="note" hidden>
             <p><b>Band</b> = your underbust minus 5 cm, rounded down to the nearest 5 (83–87 cm → 78–82 → <b>80</b>).</p>
-            <p><b>Cup</b> = bust minus the band number. Every two centimetres of difference is one cup size up.</p>
+            <p><b>Cup</b> = bust minus the band number. Every three centimetres of difference is one cup size up.</p>
             <table class="calc-tab">
-              <tr><th>Difference</th><td>10–12</td><td>12–14</td><td>14–16</td><td>16–18</td><td>18–20</td><td>20–22</td><td>22–24</td><td>24–26</td></tr>
+              <tr><th>Difference</th><td>7–10</td><td>10–13</td><td>13–16</td><td>16–19</td><td>19–22</td><td>22–25</td><td>25–28</td><td>28–31</td></tr>
               <tr><th>Cup</th><td>AA</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr>
             </table>
-            <p>Example: 78 cm underbust and 94 cm bust → 78 − 5 = 73 → band <b>70</b>, difference <b>24 cm</b> → size <b>70G</b>.</p>
+            <p>Example: 76 cm underbust and 92 cm bust → 76 − 5 = 71 → band <b>70</b>, difference <b>22 cm</b> → size <b>70E</b>.</p>
             <p>Treat the result as a guide. Every brand cuts a little differently, which is why we always try things on here.</p>
           </div>
           <button type="button" class="calc-info-btn" id="calcInfoBtn" aria-expanded="false" aria-controls="calcInfoBox">
@@ -1217,25 +1217,25 @@
       rangePod:  'Enter an underbust measurement between 55 and 140 cm.',
       rangePres: 'Enter a bust measurement between 60 and 180 cm.',
       order:     'Your bust measurement must be larger than your underbust. Please check again.',
-      tooSmall:  'The difference works out at under 10 cm. Please check your measurements - or come in and we will help you in person.',
+      tooSmall:  'The difference works out at under 7 cm. Please check your measurements - or come in and we will help you in person.',
       recap:     'Band <b>{b}</b>, difference against your bust <b>{d} cm</b>.',
       edge:      'You are right on the line between two cups - try <b>{s}</b> as well.',
       sisters:   'Sister sizes worth trying: {list}.',
       invite:    'Come and try them on with us, no rush.'
     };
 
-    /* max = horní hranice rozdílu včetně; košíček sedí na hranici dolů
-       (rozdíl 22 cm => E, nikoli F). */
+    /* Krok košíčku je 3 cm, min = dolní hranice rozdílu včetně. */
     const CUPS = [
-      {max:12, eu:'AA'}, {max:14, eu:'A'}, {max:16, eu:'B'}, {max:18, eu:'C'},
-      {max:20, eu:'D'},  {max:22, eu:'E'}, {max:24, eu:'F'}, {max:26, eu:'G'},
-      {max:28, eu:'H'},  {max:30, eu:'I'}, {max:32, eu:'J'}, {max:34, eu:'K'},
-      {max:36, eu:'L'},  {max:38, eu:'M'}, {max:40, eu:'N'}
+      {min:7,  eu:'AA'}, {min:10, eu:'A'}, {min:13, eu:'B'}, {min:16, eu:'C'},
+      {min:19, eu:'D'},  {min:22, eu:'E'}, {min:25, eu:'F'}, {min:28, eu:'G'},
+      {min:31, eu:'H'},  {min:34, eu:'I'}, {min:37, eu:'J'}, {min:40, eu:'K'},
+      {min:43, eu:'L'},  {min:46, eu:'M'}, {min:49, eu:'N'}
     ];
 
     function cupFor(d){
-      for(let k = 0; k < CUPS.length; k++){ if(d <= CUPS[k].max + 1e-9) return CUPS[k]; }
-      return CUPS[CUPS.length - 1];
+      let c = CUPS[0];
+      for(let k = 0; k < CUPS.length; k++){ if(d >= CUPS[k].min - 1e-9) c = CUPS[k]; }
+      return c;
     }
     function fmt(n){ return (Math.round(n * 10) / 10).toFixed(1).replace('.', DEC); }
     function fail(msg){ err.textContent = msg; err.hidden = false; out.hidden = true; }
@@ -1254,7 +1254,7 @@
       /* Košíček se počítá proti číslu obvodu, ne proti syrové míře. */
       const diff = pres - band;
 
-      if(diff < 10) return fail(T.tooSmall);
+      if(diff < 7) return fail(T.tooSmall);
 
       err.hidden = true;
       const cup = cupFor(diff);
@@ -1266,9 +1266,9 @@
 
       /* Hraniční hodnota - nabídneme i sousední košíček. */
       const up = CUPS[i+1];
-      if(up && (cup.max - diff) <= 0.5){
+      if(up && (up.min - diff) <= 0.5){
         parts.push(T.edge.replace('{s}', band + up.eu));
-      } else if(i > 0 && (diff - (cup.max - 2)) <= 0.5){
+      } else if(i > 0 && (diff - cup.min) <= 0.5){
         parts.push(T.edge.replace('{s}', band + CUPS[i-1].eu));
       }
 
